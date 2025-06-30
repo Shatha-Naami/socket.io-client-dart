@@ -37,8 +37,8 @@ class Socket extends EventEmitter {
 
   int prevBufferLen = 0;
   List? upgrades;
-  dynamic? pingInterval;
-  dynamic? pingTimeout;
+  dy? pingInterval;
+  int? pingTimeout;
   Timer? pingTimeoutTimer;
   bool? upgrading;
   int? maxPayload;
@@ -375,7 +375,7 @@ class Socket extends EventEmitter {
 
       // Socket is live - any packet counts
       emitReserved('heartbeat');
-      // resetPingTimeout();
+      resetPingTimeout();
 
       switch (type) {
         case 'open':
@@ -418,7 +418,7 @@ class Socket extends EventEmitter {
     onOpen();
     // In case open handler closes socket
     if ('closed' == readyState) return;
-    // resetPingTimeout();
+    resetPingTimeout();
   }
 
   ///
